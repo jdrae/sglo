@@ -2,9 +2,9 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${DBHOST}:3306/${DBNAME}?allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
-    username: ${DBID}
-    password: ${DBPW}
+    url: jdbc:mysql://localhost:3306/sglo?allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
+    username: springuser
+    password: ThePassword
 
   sql:
     init:
@@ -12,7 +12,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
     properties:
       hibernate:
         show_sql: true
@@ -22,7 +22,6 @@ spring:
 
 logging:
   level:
-    org.hibernate.SQL: debug
     org.hibernate.type.descriptor.sql: trace
     org.springframework.boot.autoconfigure: info
     logging.level.org.springframework.web: trace
