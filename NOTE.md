@@ -15,3 +15,17 @@
 [OAuth 2.0 Resource Server JWT](https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/jwt.html#oauth2resourceserver-jwt-architecture)
 
 [Spring Boot and OAuth2](https://spring.io/guides/tutorials/spring-boot-oauth2/)
+
+### About Refresh Token
+
+[What is the purpose of a "Refresh Token"?](https://stackoverflow.com/questions/38986005/what-is-the-purpose-of-a-refresh-token)
+
+[What Are Refresh Tokens and How to Use Them Securely](https://auth0.com/blog/refresh-tokens-what-are-they-and-when-to-use-them/)
+
+[Is it secure to store a refresh token in the database?](https://stackoverflow.com/questions/59511628/is-it-secure-to-store-a-refresh-token-in-the-database-to-issue-new-access-toke)
+
+### References
+
+https://github.com/SongHeeJae/kuke-market
+
+https://github.com/ShinDongHun1/SpringBoot-Board-API

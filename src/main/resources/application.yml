@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: local
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -25,7 +27,7 @@ logging:
     org.hibernate.type.descriptor.sql: trace
     org.springframework.boot.autoconfigure: info
     logging.level.org.springframework.web: trace
-    org.apache.coyote.http11: debug
+    org.apache.coyote.http11: trace
     io.sglo: debug
 
 jwt:

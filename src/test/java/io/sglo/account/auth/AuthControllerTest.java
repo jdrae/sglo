@@ -3,6 +3,7 @@ package io.sglo.account.auth;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.sglo.account.auth.dto.LoginRequest;
 import io.sglo.account.auth.dto.LoginResponse;
+import io.sglo.account.auth.dto.RefreshTokenResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,6 +34,9 @@ class AuthControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(authController).build();
     }
 
+    /**
+     * Login Test
+     */
     @Test
     void login() throws Exception {
         // given
@@ -51,5 +55,30 @@ class AuthControllerTest {
         verify(authService).login(req);
     }
 
+    @Test
+    public void loginArgumentNotValidException() throws Exception{
+        // then
+        mockMvc.perform(
+                post("/api/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(new LoginRequest(" ", "password"))))
+                .andExpect(status().isBadRequest());
+    }
+
+    /**
+     * Refresh Token test
+     */
+    @Test
+    public void refreshToken() throws Exception{
+        // given
+        given(authService.refreshAccessToken("refreshToken")).willReturn(new RefreshTokenResponse("accessToken"));
+
+        // then
+        mockMvc.perform(
+                post("/api/refresh-token")
+                        .header("Authorization", "refreshToken"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.accessToken").value("accessToken"));
+    }
 
 }

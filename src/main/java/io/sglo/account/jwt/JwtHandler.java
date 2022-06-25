@@ -1,18 +1,18 @@
 package io.sglo.account.jwt;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.jwt.*;
+import org.springframework.stereotype.Component;
 
 import java.time.Instant;
 import java.util.Map;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 public class JwtHandler {
 
-    @Autowired
-    JwtEncoder jwtEncoder;
-    @Autowired
-    JwtDecoder jwtDecoder;
+    private final JwtEncoder jwtEncoder;
+    private final JwtDecoder jwtDecoder;
 
     private String type = "Bearer ";
 
@@ -39,6 +39,7 @@ public class JwtHandler {
 
     //== helper methods ==//
     private String untype(String token){
+        // TODO: check "Bearer"
         return token.substring(type.length());
     }
 }

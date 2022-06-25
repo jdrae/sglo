@@ -2,6 +2,7 @@ package io.sglo.account.auth;
 
 import io.sglo.account.auth.dto.LoginRequest;
 import io.sglo.account.auth.dto.LoginResponse;
+import io.sglo.account.auth.dto.RefreshTokenResponse;
 import io.sglo.account.common.entity.User;
 import io.sglo.account.common.exception.BaseException;
 import io.sglo.account.common.exception.UserExceptionType;
@@ -39,6 +40,9 @@ class AuthServiceTest {
         authService = new AuthService(userRepository, passwordEncoder, accessTokenHelper, refreshTokenHelper);
     }
 
+    /**
+     * Login tests
+     */
     @Test
     public void login() throws Exception{
         // given
@@ -74,6 +78,33 @@ class AuthServiceTest {
         // then
         assertThat(assertThrows(BaseException.class, () -> authService.login(new LoginRequest("user","pass"))).getExceptionType())
                 .isEqualTo(UserExceptionType.LOGIN_FAILURE);
+    }
+
+    /**
+     * Refresh token tests
+     */
+    @Test
+    public void refreshToken() throws Exception{
+        // given
+        given(refreshTokenHelper.parse("refreshToken")).willReturn(Optional.of(new TokenHelper.PrivateClaims("1")));
+        given(accessTokenHelper.createToken(any())).willReturn("accessToken");
+
+        // when
+        RefreshTokenResponse res = authService.refreshAccessToken("refreshToken");
+
+        // then
+        assertThat(res.getAccessToken()).isEqualTo("accessToken");
+    }
+
+    @Test
+    public void refreshTokenExceptionByInvalidToken() throws Exception{
+        // given
+        given(refreshTokenHelper.parse("refreshToken")).willReturn(Optional.empty());
+
+        // then
+        assertThat(assertThrows(BaseException.class,
+                () -> authService.refreshAccessToken("refreshToken")).getExceptionType())
+                .isEqualTo(UserExceptionType.REFRESH_TOKEN_FAILURE);
     }
 
     //== helper methods==//

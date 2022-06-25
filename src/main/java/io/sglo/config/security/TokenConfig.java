@@ -8,7 +8,6 @@ import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import io.sglo.account.jwt.JwtHandler;
 import io.sglo.account.jwt.TokenHelper;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,10 +20,7 @@ import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 
 @Configuration
-@RequiredArgsConstructor
 public class TokenConfig {
-
-    private final JwtHandler jwtHandler;
 
     // TODO: separate access key and refresh key
     @Value("${jwt.public.key}")
@@ -34,24 +30,26 @@ public class TokenConfig {
     RSAPrivateKey priv;
 
     @Bean
-    JwtDecoder jwtDecoder() {
-        return NimbusJwtDecoder.withPublicKey(this.key).build();
-    }
-
-    @Bean
-    JwtEncoder jwtEncoder() {
-        JWK jwk = new RSAKey.Builder(this.key).privateKey(this.priv).build();
-        JWKSource<SecurityContext> jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
-        return new NimbusJwtEncoder(jwks);
-    }
-
-    @Bean
     public TokenHelper accessTokenHelper(@Value("${jwt.access.expiry}") long expiryInSec){
+        JwtHandler jwtHandler = new JwtHandler(jwtEncoder(key, priv), jwtDecoder(key));
         return new TokenHelper(jwtHandler, expiryInSec);
     }
 
     @Bean
     public TokenHelper refreshTokenHelper(@Value("${jwt.refresh.expiry}") long expiryInSec){
+        JwtHandler jwtHandler = new JwtHandler(jwtEncoder(key, priv), jwtDecoder(key));
         return new TokenHelper(jwtHandler, expiryInSec);
     }
+
+
+    JwtEncoder jwtEncoder(RSAPublicKey key, RSAPrivateKey priv) {
+        JWK jwk = new RSAKey.Builder(key).privateKey(priv).build();
+        JWKSource<SecurityContext> jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
+        return new NimbusJwtEncoder(jwks);
+    }
+
+    JwtDecoder jwtDecoder(RSAPublicKey key) {
+        return NimbusJwtDecoder.withPublicKey(key).build();
+    }
+
 }

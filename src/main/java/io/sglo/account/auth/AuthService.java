@@ -2,6 +2,7 @@ package io.sglo.account.auth;
 
 import io.sglo.account.auth.dto.LoginRequest;
 import io.sglo.account.auth.dto.LoginResponse;
+import io.sglo.account.auth.dto.RefreshTokenResponse;
 import io.sglo.account.common.entity.User;
 import io.sglo.account.common.exception.BaseException;
 import io.sglo.account.common.exception.UserExceptionType;
@@ -30,7 +31,16 @@ public class AuthService {
         TokenHelper.PrivateClaims privateClaims = createPrivateClaims(user);
         String accessToken = accessTokenHelper.createToken(privateClaims);
         String refreshToken = refreshTokenHelper.createToken(privateClaims);
+        // TODO: set token in header
         return new LoginResponse(accessToken, refreshToken);
+    }
+
+    public RefreshTokenResponse refreshAccessToken(String refreshToken) {
+        TokenHelper.PrivateClaims privateClaims = refreshTokenHelper.parse(refreshToken)
+                .orElseThrow(() -> new BaseException(UserExceptionType.REFRESH_TOKEN_FAILURE));
+
+        String accessToken = accessTokenHelper.createToken(privateClaims);
+        return new RefreshTokenResponse(accessToken);
     }
 
     //== helper methods ==//
@@ -44,4 +54,5 @@ public class AuthService {
         return new TokenHelper.PrivateClaims(
                 String.valueOf(user.getId()));
     }
+
 }
