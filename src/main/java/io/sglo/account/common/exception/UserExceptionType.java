@@ -3,7 +3,9 @@ package io.sglo.account.common.exception;
 import org.springframework.http.HttpStatus;
 
 public enum UserExceptionType implements BaseExceptionType{
-    NOT_FOUND_MEMBER(HttpStatus.NOT_FOUND, "회원을 찾을 수 없습니다.");
+    LOGIN_FAILURE(HttpStatus.UNAUTHORIZED, "로그인에 실패했습니다."),
+    NOT_FOUND_MEMBER(HttpStatus.NOT_FOUND, "회원을 찾을 수 없습니다.")
+    ;
 
     private HttpStatus httpStatus;
     private String errorMessage;

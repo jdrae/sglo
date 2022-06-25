@@ -27,3 +27,9 @@ logging:
     logging.level.org.springframework.web: trace
     org.apache.coyote.http11: debug
     io.sglo: debug
+
+jwt:
+  private.key: classpath:app.key
+  public.key: classpath:app.pub
+  access.expiry: 1200
+  refresh.expiry: 1800
