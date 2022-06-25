@@ -31,7 +31,7 @@ public class SecurityConfig {
 
                 .and()
                     .authorizeRequests()
-                    .antMatchers(HttpMethod.POST, "/api/login", "/api/refresh-token").permitAll()
+                    .antMatchers(HttpMethod.POST, "/api/login", "/api/register", "/api/refresh-token").permitAll()
                     .antMatchers(HttpMethod.GET, "/api/**").permitAll()
                     .anyRequest().authenticated()
 
