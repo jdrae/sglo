@@ -3,6 +3,7 @@ package io.sglo.account.auth;
 import io.sglo.account.auth.dto.LoginRequest;
 import io.sglo.account.auth.dto.LoginResponse;
 import io.sglo.account.auth.dto.RefreshTokenResponse;
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,7 @@ public class AuthController {
     // TODO: move logic to filter chain
     @PostMapping("/refresh-token")
     @ResponseStatus(HttpStatus.OK)
-    public RefreshTokenResponse refreshToken(@RequestHeader(value = "Authorization") String refreshToken){
+    public RefreshTokenResponse refreshToken(@Parameter(hidden = true) @RequestHeader(value = "Authorization") String refreshToken){
         return authService.refreshAccessToken(refreshToken);
     }
 

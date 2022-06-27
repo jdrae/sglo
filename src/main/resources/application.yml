@@ -22,6 +22,13 @@ spring:
 
     defer-datasource-initialization: true
 
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    disable-swagger-default-url: true
+    path: swagger-ui.html
+
 logging:
   level:
     org.hibernate.type.descriptor.sql: trace

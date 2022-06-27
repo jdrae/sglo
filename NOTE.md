@@ -1,5 +1,14 @@
 # Development Notes
 
+### References
+
+https://github.com/spring-projects/spring-security-samples/tree/main/servlet/spring-boot/java/jwt/login
+
+https://github.com/SongHeeJae/kuke-market
+
+https://github.com/ShinDongHun1/SpringBoot-Board-API
+
+
 ### Project Structure
 
 [What is the recommended project structure for spring boot rest projects?](https://stackoverflow.com/questions/40902280/what-is-the-recommended-project-structure-for-spring-boot-rest-projects)
@@ -9,8 +18,6 @@
 [Using "Sign in" vs using "Log in"](https://ux.stackexchange.com/questions/1080/using-sign-in-vs-using-log-in/83889#83889)
 
 ### JWT & OAuth 2.0
-
-[spring-projects / spring-security-samples](https://github.com/spring-projects/spring-security-samples/tree/main/servlet/spring-boot/java/jwt/login)
 
 [OAuth 2.0 Resource Server JWT](https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/jwt.html#oauth2resourceserver-jwt-architecture)
 
@@ -24,8 +31,6 @@
 
 [Is it secure to store a refresh token in the database?](https://stackoverflow.com/questions/59511628/is-it-secure-to-store-a-refresh-token-in-the-database-to-issue-new-access-toke)
 
-### References
+### springdoc-openapi
 
-https://github.com/SongHeeJae/kuke-market
-
-https://github.com/ShinDongHun1/SpringBoot-Board-API
+[How do I add authorization header in requests?](https://springdoc.org/#how-do-i-add-authorization-header-in-requests)
