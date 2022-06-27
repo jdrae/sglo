@@ -24,6 +24,7 @@ public class AuthController {
         return authService.login(dto);
     }
 
+    // TODO: 삭제된 유저가 재발급 받으려고 하면?
     // TODO: move logic to filter chain
     @PostMapping("/refresh-token")
     @ResponseStatus(HttpStatus.OK)

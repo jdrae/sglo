@@ -4,6 +4,7 @@ import io.sglo.account.common.entity.User;
 import io.sglo.account.common.exception.BaseException;
 import io.sglo.account.common.exception.UserExceptionType;
 import io.sglo.account.common.repository.UserRepository;
+import io.sglo.account.common.validation.UserInfoValidation;
 import io.sglo.account.register.dto.RegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,11 +23,8 @@ public class RegisterService {
         if (userRepository.existsByUsername(dto.getUsername()))
             throw new BaseException(UserExceptionType.DUPLICATED_USERNAME);
 
-        String validNickname = null;
-        if(dto.getNickname() != null) {
-            validNickname = dto.getNickname().replaceAll("\\s+", "");
-            if (validNickname.length() == 0)
-                throw new BaseException(UserExceptionType.INVALID_NICKNAME);
+        String validNickname = UserInfoValidation.checkNickname(dto.getNickname());
+        if(validNickname != null) {
             if (userRepository.existsByNickname(validNickname))
                 throw new BaseException(UserExceptionType.DUPLICATED_NICKNAME);
         }

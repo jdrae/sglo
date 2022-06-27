@@ -22,6 +22,7 @@ public class RegisterRequest {
     private String password;
 
     // 실명
+    @Size(min=2, max = 30)
     private String realname;
 
     // 별명

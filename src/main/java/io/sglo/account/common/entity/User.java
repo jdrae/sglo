@@ -3,7 +3,6 @@ package io.sglo.account.common.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "users")
@@ -41,4 +40,11 @@ public class User {
         this.username = username;
         this.password = password;
     }
+
+    //== 정보 수정 ==//
+    public void updateRealname(String realname){ this.realname = realname; }
+    public void updateNickname(String nickname){ this.nickname = nickname; }
+    public void updateEmail(String email){ this.email = email; }
+    public void updatePassword(String password){ this.password = password; }
+
 }

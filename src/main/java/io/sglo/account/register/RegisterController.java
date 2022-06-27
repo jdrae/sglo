@@ -16,8 +16,8 @@ public class RegisterController {
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public void register(@Valid @RequestBody RegisterRequest req){
-        registerService.register(req);
+    public void register(@Valid @RequestBody RegisterRequest dto){
+        registerService.register(dto);
     }
 
 }

@@ -34,3 +34,7 @@ https://github.com/ShinDongHun1/SpringBoot-Board-API
 ### springdoc-openapi
 
 [How do I add authorization header in requests?](https://springdoc.org/#how-do-i-add-authorization-header-in-requests)
+
+### Use record as DTO
+
+[Java Records in Spring Boot Rest API](https://dev.to/psideris89/java-14-records-in-spring-boot-rest-api-n29)
